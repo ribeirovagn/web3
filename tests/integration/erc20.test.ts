@@ -19,7 +19,7 @@ test("Deve recuperar um ERC-20", async () => {
 
 }, 10000);
 
-test("Envia token de um address para outro", async () => {
+test("Envia ERC-20 de um address para outro", async () => {
     const contractRepository = new ContractRepository();
     const erc20Transfer = new ERC20Transfer(contractRepository);
 
@@ -27,11 +27,11 @@ test("Envia token de um address para outro", async () => {
     const input = {
         address: String(process.env.ADDRESS_CONTRACT),
         from: String(process.env.PRIVATE_KEY),
-        to: '0x0cF6715EF0ffe6821FcA0ed2619b0bCE149546a6',
-        amount: 0.01
+        to: String(process.env.ADDRESS_TO),
+        amount: 0.01256
     }
 
     const tranfer = await erc20Transfer.execute(input);
-    console.log(tranfer)
+    expect(tranfer.to).toBe(String(process.env.ADDRESS_CONTRACT).toLowerCase());
 
-}, 30000);
+}, 40000);

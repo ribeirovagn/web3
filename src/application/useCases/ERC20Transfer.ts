@@ -1,11 +1,12 @@
 import Contract from "./Contract";
 import Provider from "../../infra/web3/Provider";
 import IProvider from "../IContract";
+import { TransactionReceipt } from "web3";
 
 export default class ERC20Transfer {
     constructor(readonly contractRepository: IProvider) { }
 
-    async execute(input: Input) {
+    async execute(input: Input): Promise<TransactionReceipt> {
 
         const provider = Provider.getInstance();
         const connectionProvider = await provider.init();
